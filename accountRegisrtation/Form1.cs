@@ -1,4 +1,5 @@
 using accountRegisrtation.StudentInfo;
+using static System.Net.Mime.MediaTypeNames;
 namespace accountRegisrtation
 {
     public partial class Form1 : Form
@@ -12,8 +13,37 @@ namespace accountRegisrtation
 
         private void button1_Click(object sender, EventArgs e)
         {
-            FrmConfirm OutputFrm= new FrmConfirm();
-            OutputFrm.ShowDialog();
+
+            foreach (Control txt in this.Controls)
+            {
+                if (txt is TextBox && string.IsNullOrWhiteSpace(((TextBox)txt).Text))
+                {
+                    MessageBox.Show("Please fill in all text fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                else if (txt is ComboBox && string.IsNullOrWhiteSpace(((ComboBox)txt).Text))
+                {
+                    MessageBox.Show("Please select a program.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+            }
+
+            if (!long.TryParse(tbAge.Text, out long age))
+            {
+                MessageBox.Show("Age must be a valid number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!long.TryParse(tbContactNo.Text, out long contactNo))
+            {
+                MessageBox.Show("Contact number must be a valid number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            if (!long.TryParse(tbStudentNo.Text, out long studentNo))
+            {
+                MessageBox.Show("Student number must be a valid number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
 
             StudentInfoClass.FirstName = tbFirstName.Text.ToString();
             StudentInfoClass.LastName = tbLastnName.Text.ToString();
@@ -25,11 +55,15 @@ namespace accountRegisrtation
             StudentInfoClass.ContactNo = long.Parse(tbContactNo.Text);
             StudentInfoClass.StudentNo = long.Parse(tbStudentNo.Text);
 
-           
 
-            if (OutputFrm.ShowDialog() == DialogResult.OK) 
+            
+
+
+
+            FrmConfirm OutputFrm = new FrmConfirm();
+            if (OutputFrm.ShowDialog() == DialogResult.OK)
             {
-                foreach (Control txt in this.Controls) 
+                foreach (Control txt in this.Controls)
                 {
                     if (txt is TextBox)
                     {
@@ -39,12 +73,14 @@ namespace accountRegisrtation
                     {
                         ((ComboBox)txt).SelectedIndex = -1;
                     }
+
+                    
+
                     
                 }
-
-                this.Close();
-
             }
+
+            
         }
 
         private void label1_Click(object sender, EventArgs e)

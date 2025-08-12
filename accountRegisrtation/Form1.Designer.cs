@@ -155,10 +155,12 @@
             // 
             // cbProgram
             // 
+            cbProgram.AllowDrop = true;
             cbProgram.FormattingEnabled = true;
+            cbProgram.Items.AddRange(new object[] { "BS in Information Technology", "BS in Computer Science ", "BS in Computer Engineering", "BS in Information System" });
             cbProgram.Location = new Point(162, 41);
             cbProgram.Name = "cbProgram";
-            cbProgram.Size = new Size(137, 23);
+            cbProgram.Size = new Size(279, 23);
             cbProgram.TabIndex = 13;
             // 
             // lblAddress
