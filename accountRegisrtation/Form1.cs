@@ -78,7 +78,7 @@ namespace accountRegisrtation
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            panel1.BackColor = Color.FromArgb(100, Color.WhiteSmoke);
         }
     }
 }

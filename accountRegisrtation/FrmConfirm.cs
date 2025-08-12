@@ -47,7 +47,7 @@ namespace accountRegisrtation
             label9.Text = DelStudNo(StudentInfoClass.StudentNo).ToString();
 
 
-            panel1.BackColor = Color.FromArgb(100, Color.DarkGray);
+            panel1.BackColor = Color.FromArgb(100, Color.WhiteSmoke);
 
         }
 
