@@ -19,21 +19,7 @@ namespace accountRegisrtation
         public FrmConfirm()
         {
             InitializeComponent();
-
-
-
         }
-
-        private void label11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label16_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void FrmConfirm_Load(object sender, EventArgs e)
         {
 
@@ -49,6 +35,7 @@ namespace accountRegisrtation
             DelStudNo = new DelegateNumber(StudentInfoClass.GetStudentNo);
 
 
+            // inputs the value of each container to label
             label10.Text = DelProgram(StudentInfoClass.Program);
             label11.Text = DelLastName(StudentInfoClass.LastName);
             label12.Text = DelFirstName(StudentInfoClass.FirstName);
@@ -58,7 +45,12 @@ namespace accountRegisrtation
             label14.Text = DelNumAge(StudentInfoClass.Age).ToString();
             label15.Text = DelNumContactNo(StudentInfoClass.ContactNo).ToString();
             label9.Text = DelStudNo(StudentInfoClass.StudentNo).ToString();
+
+
+            panel1.BackColor = Color.FromArgb(100, Color.DarkGray);
+
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -68,7 +60,29 @@ namespace accountRegisrtation
 
         private void FrmConfirm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            this.DialogResult = DialogResult.OK;    
+            this.DialogResult = DialogResult.OK;
+        }
+
+
+
+        private void label11_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label16_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label17_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }

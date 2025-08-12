@@ -4,8 +4,6 @@ namespace accountRegisrtation
 {
     public partial class Form1 : Form
     {
-
-
         public Form1()
         {
             InitializeComponent();
@@ -13,38 +11,30 @@ namespace accountRegisrtation
 
         private void button1_Click(object sender, EventArgs e)
         {
-
-            foreach (Control txt in this.Controls)
+            // 1. there should be no empty text boxes
+            if (string.IsNullOrWhiteSpace(tbFirstName.Text) ||
+                string.IsNullOrWhiteSpace(tbLastnName.Text) ||
+                string.IsNullOrWhiteSpace(tbMiddleName.Text) ||
+                string.IsNullOrWhiteSpace(tbAddress.Text) ||
+                string.IsNullOrWhiteSpace(cbProgram.Text) ||
+                string.IsNullOrWhiteSpace(tbAge.Text) ||
+                string.IsNullOrWhiteSpace(tbContactNo.Text) ||
+                string.IsNullOrWhiteSpace(tbStudentNo.Text))
             {
-                if (txt is TextBox && string.IsNullOrWhiteSpace(((TextBox)txt).Text))
-                {
-                    MessageBox.Show("Please fill in all text fields.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-                else if (txt is ComboBox && string.IsNullOrWhiteSpace(((ComboBox)txt).Text))
-                {
-                    MessageBox.Show("Please select a program.", "Validation Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    return;
-                }
-            }
-
-            if (!long.TryParse(tbAge.Text, out long age))
-            {
-                MessageBox.Show("Age must be a valid number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (!long.TryParse(tbContactNo.Text, out long contactNo))
-            {
-                MessageBox.Show("Contact number must be a valid number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return;
-            }
-            if (!long.TryParse(tbStudentNo.Text, out long studentNo))
-            {
-                MessageBox.Show("Student number must be a valid number.", "Input Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please fill in all fields.", "Missing Information", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
+            // 2. if numeric fields contain non-numeric values
+            if (!long.TryParse(tbAge.Text, out long age) ||
+                !long.TryParse(tbContactNo.Text, out long contactNo) ||
+                !long.TryParse(tbStudentNo.Text, out long studentNo))
+            {
+                MessageBox.Show("Please enter valid numeric values for Age, Contact No, and Student No.", "Invalid Input", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
 
+            // 3. Store all the values in StudentInfoClass
             StudentInfoClass.FirstName = tbFirstName.Text.ToString();
             StudentInfoClass.LastName = tbLastnName.Text.ToString();
             StudentInfoClass.MiddleName = tbMiddleName.Text.ToString();
@@ -55,32 +45,30 @@ namespace accountRegisrtation
             StudentInfoClass.ContactNo = long.Parse(tbContactNo.Text);
             StudentInfoClass.StudentNo = long.Parse(tbStudentNo.Text);
 
-
-            
-
-
-
-            FrmConfirm OutputFrm = new FrmConfirm();
-            if (OutputFrm.ShowDialog() == DialogResult.OK)
+            // 4. Clear all fields using the "using method"
+            using (FrmConfirm confirmForm = new FrmConfirm())
             {
-                foreach (Control txt in this.Controls)
+                if (confirmForm.ShowDialog() == DialogResult.OK)
                 {
-                    if (txt is TextBox)
-                    {
-                        ((TextBox)txt).Clear();
-                    }
-                    else if (txt is ComboBox)
-                    {
-                        ((ComboBox)txt).SelectedIndex = -1;
-                    }
-
-                    
-
-                    
+                    ClearControls(this); // clears all text in the fields
                 }
             }
-
             
+        }
+
+
+        // method for clearing text from field
+        private void ClearControls(Control parent)
+        {
+            foreach (Control ctrl in parent.Controls)
+            {
+                if (ctrl is TextBox txtBox)
+                    txtBox.Clear();
+                else if (ctrl is ComboBox cmbBox)
+                    cmbBox.SelectedIndex = -1;
+                else if (ctrl.HasChildren)
+                    ClearControls(ctrl);
+            }
         }
 
         private void label1_Click(object sender, EventArgs e)
