@@ -19,11 +19,9 @@ namespace accountRegisrtation
         public FrmConfirm()
         {
             InitializeComponent();
-        }
-        private void FrmConfirm_Load(object sender, EventArgs e)
-        {
-
-            //instanciate delegates
+            
+            
+            //initialize  delegates
             DelProgram = new DelegateText(StudentInfoClass.GetProgram);
             DelLastName = new DelegateText(StudentInfoClass.GetLastName);
             DelFirstName = new DelegateText(StudentInfoClass.GetFirstName);
@@ -33,7 +31,9 @@ namespace accountRegisrtation
             DelNumAge = new DelegateNumber(StudentInfoClass.GetAge);
             DelNumContactNo = new DelegateNumber(StudentInfoClass.GetContactNo);
             DelStudNo = new DelegateNumber(StudentInfoClass.GetStudentNo);
-
+        }
+        private void FrmConfirm_Load(object sender, EventArgs e)
+        {
 
             // inputs the value of each container to label
             label10.Text = DelProgram(StudentInfoClass.Program);

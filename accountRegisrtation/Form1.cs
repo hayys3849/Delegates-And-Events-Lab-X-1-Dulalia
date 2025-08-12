@@ -45,15 +45,15 @@ namespace accountRegisrtation
             StudentInfoClass.ContactNo = long.Parse(tbContactNo.Text);
             StudentInfoClass.StudentNo = long.Parse(tbStudentNo.Text);
 
-            // 4. Clear all fields using the "using method"
+            // 4. call frmConfirm and Clear all fields using the "using method"
             using (FrmConfirm confirmForm = new FrmConfirm())
             {
                 if (confirmForm.ShowDialog() == DialogResult.OK)
                 {
-                    ClearControls(this); // clears all text in the fields
+                    ClearControls(this);
                 }
             }
-            
+
         }
 
 
@@ -71,14 +71,30 @@ namespace accountRegisrtation
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
+       
 
         private void Form1_Load(object sender, EventArgs e)
         {
             panel1.BackColor = Color.FromArgb(100, Color.WhiteSmoke);
+
+        }
+
+     
+
+        private void panel1_Paint_1(object sender, PaintEventArgs e)
+        {
+            
+        }   
+        
+        
+        
+         private void label1_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
         }
     }
 }
