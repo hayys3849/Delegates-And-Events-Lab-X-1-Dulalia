@@ -13,7 +13,7 @@ namespace accountRegisrtation
 {
     public partial class FrmConfirm : Form
     {
-        //declaration
+        //declaration ng delegates
         private DelegateText DelProgram, DelLastName, DelFirstName, DelMiddleName, DelAddress;
         private DelegateNumber DelNumAge, DelNumContactNo, DelStudNo;
         public FrmConfirm()
@@ -37,7 +37,7 @@ namespace accountRegisrtation
         private void FrmConfirm_Load(object sender, EventArgs e)
         {
 
-            //instance
+            //instanciate delegates
             DelProgram = new DelegateText(StudentInfoClass.GetProgram);
             DelLastName = new DelegateText(StudentInfoClass.GetLastName);
             DelFirstName = new DelegateText(StudentInfoClass.GetFirstName);

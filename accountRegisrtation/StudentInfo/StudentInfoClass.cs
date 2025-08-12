@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace accountRegisrtation.StudentInfo
 {
-
+    //gumawa ng delegates
     public delegate string DelegateText(string txt);
     public delegate long DelegateNumber(long number);
 
